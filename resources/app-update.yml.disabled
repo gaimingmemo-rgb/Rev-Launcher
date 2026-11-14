@@ -1,0 +1,4 @@
+owner: hydralauncher
+repo: hydra
+provider: github
+updaterCacheDirName: hydralauncher-updater
