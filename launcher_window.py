@@ -762,18 +762,53 @@ class RevLauncherWindow(QMainWindow):
         layout.addWidget(action_card)
 
         # Installers Section
-        inst_header = QLabel("OFFICIAL REVISION INSTALLERS & PACKAGES (INCLUDED IN DISTRIBUTION):")
+        inst_header = QLabel("OFFICIAL REVISION INSTALLERS & PACKAGES:")
         inst_header.setStyleSheet("font-size: 12px; font-weight: 900; color: #ffffff; letter-spacing: 1px; margin-top: 10px;")
         layout.addWidget(inst_header)
 
+        # Unified Suite Installer hero button
+        suite_card = QFrame()
+        suite_card.setStyleSheet("""
+            QFrame {
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #100409, stop:1 #0a0d16);
+                border: 2px solid #ff1e38;
+                border-radius: 8px;
+            }
+        """)
+        sc_layout = QHBoxLayout(suite_card)
+        sc_layout.setContentsMargins(14, 12, 14, 12)
+        sc_layout.setSpacing(14)
+
+        sc_text = QVBoxLayout()
+        sc_text.setSpacing(3)
+        sc_title = QLabel("⚡ PROJECT REVISION — SUITE INSTALLER")
+        sc_title.setStyleSheet("font-size: 12px; font-weight: 900; color: #ffffff; letter-spacing: 1px;")
+        sc_text.addWidget(sc_title)
+        sc_desc = QLabel("One installer — pick Rev-Launcher, Revision-Web, or Revision-Ai. Download & install only what you want.")
+        sc_desc.setStyleSheet("font-size: 10px; color: #7a8599;")
+        sc_desc.setWordWrap(True)
+        sc_text.addWidget(sc_desc)
+        sc_layout.addLayout(sc_text, 1)
+
+        btn_suite = QPushButton("DOWNLOAD INSTALLER")
+        btn_suite.setStyleSheet("background: #ff1e38; color: #fff; font-size: 11px; font-weight: bold; padding: 10px 18px; border: none; border-radius: 4px; letter-spacing: 1px; min-width: 160px;")
+        btn_suite.clicked.connect(lambda: webbrowser.open("http://127.0.0.1:8000/downloads/Rev-Suite-Installer.zip"))
+        sc_layout.addWidget(btn_suite)
+        layout.addWidget(suite_card)
+
+        sep2 = QLabel("— or download individually —")
+        sep2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        sep2.setStyleSheet("font-size: 10px; color: #2a3650; margin: 4px 0; letter-spacing: 1px;")
+        layout.addWidget(sep2)
+
         inst_grid = QGridLayout()
-        inst_grid.setSpacing(12)
+        inst_grid.setSpacing(10)
 
         installers = [
-            ("🌐 Revision-Web Browser", "Revision-Web-Setup.exe", "245 MB Installer", "http://127.0.0.1:8000/downloads/Revision-Web-Setup.exe"),
-            ("🚀 Rev-Launcher Ground-Up", "Rev-Launcher.zip", "Native PySide6 Build", "http://127.0.0.1:8000/downloads/Rev-Launcher.zip"),
-            ("⚡ Revision-Ai Controller", "Revision-Ai-v2.2.zip", "Automation Suite", "http://127.0.0.1:8000/downloads/Revision-Ai-v2.2.zip"),
-            ("⚓ Zartogrify Fleet Suite", "Zartogrify-v2.2.zip", "Discord Coordinator", "http://127.0.0.1:8000/downloads/Zartogrify-v2.2.zip")
+            ("🚀 Rev-Launcher", "Rev-Launcher.zip", "Native PySide6 Build", "http://127.0.0.1:8000/downloads/Rev-Launcher.zip"),
+            ("🌐 Revision-Web", "Revision-Web-Setup.exe", "245 MB EXE Installer", "http://127.0.0.1:8000/downloads/Revision-Web-Setup.exe"),
+            ("⚡ Revision-Ai", "Revision-Ai-v2.2.zip", "AI Automation Suite", "http://127.0.0.1:8000/downloads/Revision-Ai-v2.2.zip"),
+            ("⚓ Zartogrify", "Zartogrify-v2.2.zip", "Discord Coordinator", "http://127.0.0.1:8000/downloads/Zartogrify-v2.2.zip")
         ]
 
         for i, (name, fname, fsize, durl) in enumerate(installers):
