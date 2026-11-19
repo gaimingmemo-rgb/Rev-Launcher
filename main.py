@@ -13,9 +13,12 @@ from PySide6.QtGui import QIcon
 
 from config import ASSETS_DIR
 from rev_network_node import launcher_mesh_server
-from launcher_window import RevLauncherWindow
+from launcher_window import RevLauncherWindow, _ensure_website_server_running
 
 def main():
+    # Ensure Website Origin Server on port 8000 is active
+    _ensure_website_server_running()
+
     # 1. Start embedded Rev-Network P2P Mesh Server (Port 8767, UDP 8769)
     launcher_mesh_server.start()
 
