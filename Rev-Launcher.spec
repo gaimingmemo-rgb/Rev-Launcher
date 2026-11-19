@@ -5,7 +5,7 @@ a = Analysis(
     ['C:/Users/ZarTo/Desktop/Projects/Rev-Launcher/main.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('C:/Users/ZarTo/Desktop/Projects/Rev-Launcher/assets', 'assets')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

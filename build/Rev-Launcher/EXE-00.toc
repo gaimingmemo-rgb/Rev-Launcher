@@ -64,7 +64,7 @@
  [],
  False,
  False,
- 1795086362,
+ 1795089246,
  [('runw.exe',
    'C:\\Users\\ZarTo\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\runw.exe',
    'EXECUTABLE')],

@@ -112,7 +112,7 @@ QWidget {
     padding: 4px 16px;
 }
 
-.NavTabBtn {
+*[class="NavTabBtn"], .NavTabBtn {
     background: transparent;
     border: none;
     border-bottom: 3px solid transparent;
@@ -125,12 +125,12 @@ QWidget {
     margin-right: 4px;
 }
 
-.NavTabBtn:hover {
+*[class="NavTabBtn"], .NavTabBtn:hover {
     color: #ffffff;
     border-bottom: 3px solid rgba(255, 30, 56, 0.5);
 }
 
-.NavTabBtn[active="true"] {
+*[class="NavTabBtn"], .NavTabBtn[active="true"] {
     color: #ffffff;
     border-bottom: 3px solid #ff1e38;
     background: rgba(255, 30, 56, 0.08);
@@ -152,7 +152,7 @@ QWidget {
 }
 
 /* ── Filter Chips ── */
-.FilterChip {
+*[class="FilterChip"], .FilterChip {
     background-color: #111622;
     border: 1px solid #232c3f;
     color: #9aa5b8;
@@ -163,31 +163,31 @@ QWidget {
     letter-spacing: 0.8px;
 }
 
-.FilterChip:hover {
+*[class="FilterChip"], .FilterChip:hover {
     border-color: #ff1e38;
     color: #ffffff;
 }
 
-.FilterChip[active="true"] {
+*[class="FilterChip"], .FilterChip[active="true"] {
     background-color: #ff1e38;
     border-color: #ff1e38;
     color: #ffffff;
 }
 
 /* ── Game Card Styling ── */
-.GameCard {
+*[class="GameCard"], .GameCard {
     background-color: #10141e;
     border: 1px solid #1c2433;
     border-radius: 8px;
     overflow: hidden;
 }
 
-.GameCard:hover {
+*[class="GameCard"], .GameCard:hover {
     border-color: #ff1e38;
     background-color: #141a27;
 }
 
-.GameCardHeader {
+*[class="GameCard"], *[class="GameCardHeader"], .GameCardHeader {
     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #182030, stop:1 #10141e);
     border-bottom: 1px solid #1e2738;
     padding: 12px 14px;
@@ -195,14 +195,14 @@ QWidget {
     border-top-right-radius: 7px;
 }
 
-.GameCardTitle {
+*[class="GameCard"], *[class="GameCardTitle"], .GameCardTitle {
     font-size: 14px;
     font-weight: 800;
     color: #ffffff;
     line-height: 1.3;
 }
 
-.GameCardCategory {
+*[class="GameCard"], *[class="GameCardCategory"], .GameCardCategory {
     font-size: 10px;
     font-weight: 700;
     color: #00f0ff;
@@ -210,7 +210,7 @@ QWidget {
     text-transform: uppercase;
 }
 
-.GameCardBadge {
+*[class="GameCard"], *[class="GameCardBadge"], .GameCardBadge {
     background-color: #161e2c;
     border: 1px solid #28354c;
     border-radius: 4px;
@@ -220,7 +220,7 @@ QWidget {
     color: #7983f5;
 }
 
-.GameCardSize {
+*[class="GameCard"], *[class="GameCardSize"], .GameCardSize {
     background-color: rgba(255, 183, 3, 0.1);
     border: 1px solid rgba(255, 183, 3, 0.4);
     border-radius: 4px;
@@ -230,14 +230,14 @@ QWidget {
     color: #ffb703;
 }
 
-.GameCardDesc {
+*[class="GameCard"], *[class="GameCardDesc"], .GameCardDesc {
     font-size: 11px;
     color: #8b949e;
     line-height: 1.45;
 }
 
 /* ── Buttons ── */
-.BtnPrimary {
+*[class="BtnPrimary"], .BtnPrimary {
     background-color: #ff1e38;
     border: 1px solid #ff1e38;
     color: #ffffff;
@@ -249,12 +249,12 @@ QWidget {
     text-transform: uppercase;
 }
 
-.BtnPrimary:hover {
+*[class="BtnPrimary"], .BtnPrimary:hover {
     background-color: #ff3b52;
     border-color: #ffffff;
 }
 
-.BtnSecondary {
+*[class="BtnSecondary"], .BtnSecondary {
     background-color: #151b27;
     border: 1px solid #283348;
     color: #c9d1d9;
@@ -266,45 +266,45 @@ QWidget {
     text-transform: uppercase;
 }
 
-.BtnSecondary:hover {
+*[class="BtnSecondary"], .BtnSecondary:hover {
     border-color: #ff1e38;
     color: #ffffff;
 }
 
 /* ── Revision Suite App Card ── */
-.SuiteCard {
+*[class="SuiteCard"], .SuiteCard {
     background-color: #10141e;
     border: 1px solid #1e2637;
     border-radius: 8px;
     padding: 20px;
 }
 
-.SuiteCard:hover {
+*[class="SuiteCard"], .SuiteCard:hover {
     border-color: #ff1e38;
     background-color: #131926;
 }
 
-.SuiteAppTitle {
+*[class="SuiteAppTitle"], .SuiteAppTitle {
     font-size: 16px;
     font-weight: 900;
     color: #ffffff;
     letter-spacing: 1px;
 }
 
-.SuiteAppTag {
+*[class="SuiteAppTag"], .SuiteAppTag {
     font-size: 11px;
     font-weight: 700;
     color: #00f0ff;
     letter-spacing: 0.8px;
 }
 
-.SuiteAppDesc {
+*[class="SuiteAppDesc"], .SuiteAppDesc {
     font-size: 12px;
     color: #8b949e;
     line-height: 1.5;
 }
 
-.SuiteMetaText {
+*[class="SuiteMetaText"], .SuiteMetaText {
     font-size: 11px;
     color: #ffb703;
     font-weight: bold;

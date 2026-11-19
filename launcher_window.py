@@ -562,26 +562,39 @@ class RevLauncherWindow(QMainWindow):
 
         for idx, app in enumerate(ECOSYSTEM_APPS):
             card = QFrame()
-            card.setProperty("class", "SuiteCard")
+            card.setStyleSheet("""
+                QFrame {
+                    background-color: #0d1118;
+                    border: 1px solid #1e2636;
+                    border-radius: 8px;
+                }
+                QFrame:hover {
+                    border: 1px solid #ff1e38;
+                    background-color: #121824;
+                }
+            """)
             c_layout = QVBoxLayout(card)
-            c_layout.setSpacing(12)
+            c_layout.setSpacing(10)
+            c_layout.setContentsMargins(18, 18, 18, 18)
 
             top_h = QHBoxLayout()
+            top_h.setSpacing(12)
             icon_lbl = QLabel(app["icon"])
-            icon_lbl.setStyleSheet("font-size: 30px; padding-right: 8px;")
+            icon_lbl.setStyleSheet("font-size: 28px; background: transparent; border: none;")
             top_h.addWidget(icon_lbl)
 
             t_box = QVBoxLayout()
+            t_box.setSpacing(4)
             t_lbl = QLabel(app["name"])
-            t_lbl.setProperty("class", "SuiteAppTitle")
+            t_lbl.setStyleSheet("font-size: 15px; font-weight: 800; color: #ffffff; background: transparent; border: none; letter-spacing: 0.5px;")
             t_box.addWidget(t_lbl)
 
             tag_lbl = QLabel(app["tagline"])
-            tag_lbl.setProperty("class", "SuiteAppTag")
+            tag_lbl.setStyleSheet("font-size: 11px; font-weight: 600; color: #00f0ff; background: transparent; border: none;")
             t_box.addWidget(tag_lbl)
             top_h.addLayout(t_box, 1)
 
-            status_pill = QLabel("CHECKING...")
+            status_pill = QLabel("STANDBY")
             status_pill.setStyleSheet("background: #141b25; border: 1px solid #283344; color: #7f8a9e; font-size: 10px; font-weight: bold; padding: 4px 10px; border-radius: 4px;")
             top_h.addWidget(status_pill)
             self.app_status_labels[app["id"]] = status_pill
@@ -589,14 +602,13 @@ class RevLauncherWindow(QMainWindow):
             c_layout.addLayout(top_h)
 
             d_lbl = QLabel(app["description"])
-            d_lbl.setProperty("class", "SuiteAppDesc")
+            d_lbl.setStyleSheet("font-size: 11px; color: #8b949e; line-height: 1.4; background: transparent; border: none;")
             d_lbl.setWordWrap(True)
             c_layout.addWidget(d_lbl)
 
-            # Fixed bullet character (no raw &bull;)
             port_text = f"Port: {app['port']}" if app['port'] else "Embedded"
             meta_lbl = QLabel(f"Role: {app['role']}  •  {port_text}")
-            meta_lbl.setProperty("class", "SuiteMetaText")
+            meta_lbl.setStyleSheet("font-size: 10px; color: #ffb703; font-weight: bold; background: transparent; border: none;")
             c_layout.addWidget(meta_lbl)
 
             c_layout.addStretch()
@@ -604,17 +616,17 @@ class RevLauncherWindow(QMainWindow):
             # Button
             if app["id"] == "rev_website":
                 btn_launch = QPushButton("🌐 OPEN OFFICIAL WEBSITE")
-                btn_launch.setProperty("class", "BtnPrimary")
+                btn_launch.setStyleSheet("background-color: #00f0ff; color: #050b10; font-size: 11px; font-weight: 800; letter-spacing: 1px; padding: 9px 16px; border: none; border-radius: 4px;")
                 btn_launch.clicked.connect(open_website)
                 c_layout.addWidget(btn_launch)
             elif app["entry_point"]:
                 btn_launch = QPushButton(f"🚀 LAUNCH {app['name'].upper()}")
-                btn_launch.setProperty("class", "BtnPrimary")
+                btn_launch.setStyleSheet("background-color: #ff1e38; color: #ffffff; font-size: 11px; font-weight: 800; letter-spacing: 1px; padding: 9px 16px; border: none; border-radius: 4px;")
                 btn_launch.clicked.connect(lambda _, a_id=app["id"]: self.launch_eco_app(a_id))
                 c_layout.addWidget(btn_launch)
             else:
                 btn_launch = QPushButton("📡 VIEW MESH TELEMETRY")
-                btn_launch.setProperty("class", "BtnSecondary")
+                btn_launch.setStyleSheet("background-color: #151b27; border: 1px solid #283348; color: #c9d1d9; font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 9px 14px; border-radius: 4px;")
                 btn_launch.clicked.connect(lambda: self.switch_tab(3))
                 c_layout.addWidget(btn_launch)
 
@@ -805,9 +817,9 @@ class RevLauncherWindow(QMainWindow):
         inst_grid.setSpacing(10)
 
         installers = [
-            ("🚀 Rev-Launcher", "Rev-Launcher.zip", "Native .EXE Build & Icon", "http://127.0.0.1:8000/downloads/Rev-Launcher.zip"),
-            ("🌐 Revision-Web", "Revision-Web.zip", "Tactical Browser .EXE & Icon", "http://127.0.0.1:8000/downloads/Revision-Web.zip"),
-            ("⚡ Revision-Ai", "Revision-Ai-v2.2.zip", "AI Controller .EXE & Icon", "http://127.0.0.1:8000/downloads/Revision-Ai-v2.2.zip")
+            ("🚀 Rev-Launcher", "Rev-Launcher-Setup.exe", "Standalone Installer (.EXE)", "http://127.0.0.1:8000/downloads/Rev-Launcher-Setup.exe"),
+            ("🌐 Revision-Web", "Revision-Web-Setup.exe", "Tactical Browser Installer (.EXE)", "http://127.0.0.1:8000/downloads/Revision-Web-Setup.exe"),
+            ("⚡ Revision-Ai", "Revision-Ai-Setup.exe", "AI Controller Installer (.EXE)", "http://127.0.0.1:8000/downloads/Revision-Ai-Setup.exe")
         ]
 
         for i, (name, fname, fsize, durl) in enumerate(installers):
