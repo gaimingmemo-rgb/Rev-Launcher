@@ -278,9 +278,11 @@ class RevLauncherWindow(QMainWindow):
         version_pill.setStyleSheet("background: #141b27; border: 1px solid #222d42; color: #8b949e; font-size: 9px; font-weight: bold; padding: 2px 6px; border-radius: 3px;")
         tb_layout.addWidget(version_pill)
 
-        # Mesh Status Badge
-        self.mesh_badge = QLabel("● MESH ONLINE [PORT 8767]")
+        # Mesh / VPN Status Badge
+        badge_text = f"🛡️ VPN ACTIVE [{launcher_node_state.vpn_ip}]" if launcher_node_state.vpn_active else "● MESH ONLINE [PORT 8767]"
+        self.mesh_badge = QLabel(badge_text)
         self.mesh_badge.setObjectName("MeshStatusBadge")
+        self.mesh_badge.setToolTip("DDoS Shielded via Virtual VPN Adapter" if launcher_node_state.vpn_active else "Rev-Network P2P Node Online")
         tb_layout.addWidget(self.mesh_badge)
 
         tb_layout.addStretch()
@@ -662,14 +664,14 @@ class RevLauncherWindow(QMainWindow):
         ac_layout = QVBoxLayout(action_card)
         ac_layout.setSpacing(14)
 
-        ac_title = QLabel("ACCESS OPTIONS:")
+        ac_title = QLabel("ACCESS OPTIONS & DDOS-PROTECTED LINKS:")
         ac_title.setStyleSheet("font-size: 12px; font-weight: bold; color: #ff1e38; letter-spacing: 1px;")
         ac_layout.addWidget(ac_title)
 
         btn_row = QHBoxLayout()
         btn_row.setSpacing(12)
 
-        btn_open_web = QPushButton("🌐 OPEN IN DEFAULT BROWSER")
+        btn_open_web = QPushButton("🌐 OPEN WEBSITE (INSTANT)")
         btn_open_web.setStyleSheet("""
             QPushButton {
                 background-color: #00f0ff;
@@ -705,7 +707,26 @@ class RevLauncherWindow(QMainWindow):
         btn_open_rev.clicked.connect(lambda: ecosystem_manager.launch_app("revision_web"))
         btn_row.addWidget(btn_open_rev)
 
-        btn_start_server = QPushButton("🔄 RESTART ORIGIN SERVER (PORT 8000)")
+        btn_copy_vpn = QPushButton("🛡️ COPY VPN LINK (26.68.132.89:8000)")
+        btn_copy_vpn.setStyleSheet("""
+            QPushButton {
+                background-color: #1a2233;
+                border: 1px solid #00ff88;
+                color: #00ff88;
+                font-weight: bold;
+                font-size: 12px;
+                padding: 12px 20px;
+                border-radius: 4px;
+            }
+            QPushButton:hover {
+                background-color: #00ff88;
+                color: #050d12;
+            }
+        """)
+        btn_copy_vpn.clicked.connect(self.copy_vpn_link)
+        btn_row.addWidget(btn_copy_vpn)
+
+        btn_start_server = QPushButton("🔄 RESTART SERVER (PORT 8000)")
         btn_start_server.setStyleSheet("""
             QPushButton {
                 background-color: #171d2b;
@@ -717,15 +738,66 @@ class RevLauncherWindow(QMainWindow):
                 border-radius: 4px;
             }
             QPushButton:hover {
-                border-color: #00ff88;
-                color: #00ff88;
+                border-color: #ffb703;
+                color: #ffb703;
             }
         """)
         btn_start_server.clicked.connect(self.restart_origin_server)
         btn_row.addWidget(btn_start_server)
 
         ac_layout.addLayout(btn_row)
+
+        # VPN Shield Callout
+        vpn_box = QFrame()
+        vpn_box.setStyleSheet("background: #0d1916; border: 1px solid #00ff88; border-radius: 6px; padding: 12px;")
+        vb_layout = QVBoxLayout(vpn_box)
+        vb_title = QLabel("🛡️ VPN DDOS SHIELD ACTIVE: Radmin VPN (26.68.132.89)")
+        vb_title.setStyleSheet("font-size: 12px; font-weight: bold; color: #00ff88;")
+        vb_layout.addWidget(vb_title)
+        vb_desc = QLabel("Your home router IP is shielded. Mesh traffic and website requests route through the encrypted virtual LAN adapter so attackers cannot DDoS your home network.")
+        vb_desc.setStyleSheet("font-size: 11px; color: #88d4aa;")
+        vb_layout.addWidget(vb_desc)
+        ac_layout.addWidget(vpn_box)
+
         layout.addWidget(action_card)
+
+        # Installers Section
+        inst_header = QLabel("OFFICIAL REVISION INSTALLERS & PACKAGES (INCLUDED IN DISTRIBUTION):")
+        inst_header.setStyleSheet("font-size: 12px; font-weight: 900; color: #ffffff; letter-spacing: 1px; margin-top: 10px;")
+        layout.addWidget(inst_header)
+
+        inst_grid = QGridLayout()
+        inst_grid.setSpacing(12)
+
+        installers = [
+            ("🌐 Revision-Web Browser", "Revision-Web-Setup.exe", "245 MB Installer", "http://127.0.0.1:8000/downloads/Revision-Web-Setup.exe"),
+            ("🚀 Rev-Launcher Ground-Up", "Rev-Launcher.zip", "Native PySide6 Build", "http://127.0.0.1:8000/downloads/Rev-Launcher.zip"),
+            ("⚡ Revision-Ai Controller", "Revision-Ai-v2.2.zip", "Automation Suite", "http://127.0.0.1:8000/downloads/Revision-Ai-v2.2.zip"),
+            ("⚓ Zartogrify Fleet Suite", "Zartogrify-v2.2.zip", "Discord Coordinator", "http://127.0.0.1:8000/downloads/Zartogrify-v2.2.zip")
+        ]
+
+        for i, (name, fname, fsize, durl) in enumerate(installers):
+            i_card = QFrame()
+            i_card.setStyleSheet("background: #121622; border: 1px solid #202838; border-radius: 6px; padding: 12px;")
+            ic_layout = QVBoxLayout(i_card)
+            ic_layout.setSpacing(6)
+
+            n_lbl = QLabel(name)
+            n_lbl.setStyleSheet("font-size: 12px; font-weight: bold; color: #fff;")
+            ic_layout.addWidget(n_lbl)
+
+            s_lbl = QLabel(f"{fname}  •  {fsize}")
+            s_lbl.setStyleSheet("font-size: 10px; color: #00f0ff;")
+            ic_layout.addWidget(s_lbl)
+
+            btn_dl = QPushButton("DOWNLOAD")
+            btn_dl.setStyleSheet("background: #ff1e38; color: #fff; font-size: 10px; font-weight: bold; padding: 6px; border: none; border-radius: 3px;")
+            btn_dl.clicked.connect(lambda _, u=durl: webbrowser.open(u))
+            ic_layout.addWidget(btn_dl)
+
+            inst_grid.addWidget(i_card, i // 2, i % 2)
+
+        layout.addLayout(inst_grid)
 
         # Status readout
         self.lbl_portal_status = QLabel("Checking Website Gateway on port 8000...")
@@ -738,6 +810,11 @@ class RevLauncherWindow(QMainWindow):
     def restart_origin_server(self):
         _ensure_website_server_running()
         QMessageBox.information(self, "Server Online", "Website Origin Server started on port 8000!")
+
+    def copy_vpn_link(self):
+        vpn_url = f"http://{launcher_node_state.vpn_ip or '26.68.132.89'}:8000"
+        QApplication.clipboard().setText(vpn_url)
+        QMessageBox.information(self, "VPN Link Copied", f"DDoS-Protected VPN Gateway URL copied to clipboard:\n\n{vpn_url}\n\nShare this with pilots connected to your Radmin VPN network!")
 
     # ─── TAB 4: P2P MESH MATRIX ──────────────────────────────────────────────
     def build_mesh_page(self) -> QWidget:

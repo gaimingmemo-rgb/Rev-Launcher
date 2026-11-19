@@ -8,6 +8,7 @@ from pathlib import Path
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse
 from config import DATA_DIR, config
+from vpn_manager import detect_vpn_interface
 
 MESSAGES_FILE = DATA_DIR / "mesh_messages.json"
 UDP_DISCOVERY_PORT = 8769
@@ -17,7 +18,10 @@ class LauncherNodeState:
         self.lock = threading.Lock()
         self.app_name = app_name
         self.port = port
-        self.local_ip = self._get_local_ip()
+        self.vpn_info = detect_vpn_interface()
+        self.vpn_active = self.vpn_info.get("active", False)
+        self.vpn_ip = self.vpn_info.get("ip")
+        self.local_ip = self.vpn_ip if self.vpn_active else self._get_local_ip()
         self.node_id = f"rev-launcher-{int(time.time()*1000) % 100000}"
         self.start_time = time.time()
         self.power_score = self._compute_power_score()
@@ -26,6 +30,8 @@ class LauncherNodeState:
 
         # Register self
         self.register_peer("127.0.0.1", "Pilot (Host)", port=self.port, app=self.app_name, is_self=True)
+        if self.vpn_active:
+            self.register_peer(self.vpn_ip, "Pilot [VPN Shielded]", port=self.port, app=self.app_name, is_self=True)
 
     def _get_local_ip(self):
         try:
@@ -163,14 +169,20 @@ def _heartbeat_to_origin():
     import ssl
     ssl_unverified = ssl._create_unverified_context()
     origin_url = os.environ.get("REV_ORIGIN_URL", "https://rev-network.ddns.net:8000")
-    endpoints = [f"{origin_url.rstrip('/')}/api/register-node", "http://127.0.0.1:8000/api/register-node"]
+    endpoints = [
+        "http://127.0.0.1:8000/api/register-node",
+        "http://26.68.132.89:8000/api/register-node",
+        f"{origin_url.rstrip('/')}/api/register-node"
+    ]
 
     while True:
         payload = json.dumps({
             "node_id": launcher_node_state.node_id,
             "app": launcher_node_state.app_name,
             "port": launcher_node_state.port,
-            "role": "Community Mesh Relay & Launcher Node",
+            "vpn_ip": launcher_node_state.vpn_ip,
+            "ddos_shield": launcher_node_state.vpn_active,
+            "role": "DDoS-Shielded Launcher Node",
             "power_score": launcher_node_state.power_score
         }).encode("utf-8")
 

@@ -79,6 +79,12 @@ class EcosystemManager:
         if not app:
             return False, f"Unknown application ID: {app_id}"
 
+        # If it's the website and port 8000 is already running, just open it!
+        if app_id == "rev_website" and self.check_app_status(app):
+            import webbrowser
+            webbrowser.open("http://127.0.0.1:8000")
+            return True, "Website Gateway is already active! Opened in browser."
+
         entry_point = app.get("entry_point")
         working_dir = app.get("working_dir")
 
