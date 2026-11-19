@@ -1,0 +1,333 @@
+/* REV-LAUNCHER NOIR & TACTICAL CRIMSON // CLEAN AAA CLIENT STYLING */
+
+QMainWindow {
+    background-color: #08090d;
+    color: #e6edf3;
+}
+
+QWidget {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    color: #e6edf3;
+    font-size: 12px;
+}
+
+/* ── Custom Header Title Bar ── */
+#LauncherTitleBar {
+    background-color: #0b0e14;
+    border-bottom: 2px solid #8a0e1c;
+    min-height: 48px;
+    max-height: 48px;
+    padding: 0 16px;
+}
+
+#TitleBarLabel {
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 2.5px;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding-left: 8px;
+}
+
+#MeshStatusBadge {
+    background-color: rgba(0, 255, 136, 0.1);
+    border: 1px solid #00ff88;
+    color: #00ff88;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+}
+
+/* ── Top Header Action Buttons ── */
+#WebsiteHubBtn {
+    background: rgba(0, 240, 255, 0.12);
+    border: 1px solid #00f0ff;
+    color: #00f0ff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+#WebsiteHubBtn:hover {
+    background: #00f0ff;
+    color: #050b10;
+}
+
+#ReleasesHubBtn {
+    background: rgba(255, 183, 3, 0.12);
+    border: 1px solid #ffb703;
+    color: #ffb703;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+#ReleasesHubBtn:hover {
+    background: #ffb703;
+    color: #050b10;
+}
+
+#DiscordHubBtn {
+    background: rgba(88, 101, 242, 0.15);
+    border: 1px solid #5865F2;
+    color: #a4afff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+#DiscordHubBtn:hover {
+    background: #5865F2;
+    color: #ffffff;
+}
+
+#AddSourceBtn {
+    background: rgba(255, 30, 56, 0.15);
+    border: 1px solid #ff1e38;
+    color: #ff334b;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+#AddSourceBtn:hover {
+    background: #ff1e38;
+    color: #ffffff;
+}
+
+/* ── Navigation Tab Bar ── */
+#LauncherNavContainer {
+    background-color: #0c0f16;
+    border-bottom: 1px solid #1a2230;
+    padding: 4px 16px;
+}
+
+.NavTabBtn {
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #8b949e;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    margin-right: 4px;
+}
+
+.NavTabBtn:hover {
+    color: #ffffff;
+    border-bottom: 3px solid rgba(255, 30, 56, 0.5);
+}
+
+.NavTabBtn[active="true"] {
+    color: #ffffff;
+    border-bottom: 3px solid #ff1e38;
+    background: rgba(255, 30, 56, 0.08);
+}
+
+/* ── Search Bar ── */
+#LauncherSearchBar {
+    background-color: #0e131d;
+    border: 1px solid #232d40;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 13px;
+    padding: 10px 16px;
+}
+
+#LauncherSearchBar:focus {
+    border-color: #ff1e38;
+    background-color: #121824;
+}
+
+/* ── Filter Chips ── */
+.FilterChip {
+    background-color: #111622;
+    border: 1px solid #232c3f;
+    color: #9aa5b8;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 4px;
+    letter-spacing: 0.8px;
+}
+
+.FilterChip:hover {
+    border-color: #ff1e38;
+    color: #ffffff;
+}
+
+.FilterChip[active="true"] {
+    background-color: #ff1e38;
+    border-color: #ff1e38;
+    color: #ffffff;
+}
+
+/* ── Game Card Styling ── */
+.GameCard {
+    background-color: #10141e;
+    border: 1px solid #1c2433;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.GameCard:hover {
+    border-color: #ff1e38;
+    background-color: #141a27;
+}
+
+.GameCardHeader {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #182030, stop:1 #10141e);
+    border-bottom: 1px solid #1e2738;
+    padding: 12px 14px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.GameCardTitle {
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+.GameCardCategory {
+    font-size: 10px;
+    font-weight: 700;
+    color: #00f0ff;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.GameCardBadge {
+    background-color: #161e2c;
+    border: 1px solid #28354c;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #7983f5;
+}
+
+.GameCardSize {
+    background-color: rgba(255, 183, 3, 0.1);
+    border: 1px solid rgba(255, 183, 3, 0.4);
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #ffb703;
+}
+
+.GameCardDesc {
+    font-size: 11px;
+    color: #8b949e;
+    line-height: 1.45;
+}
+
+/* ── Buttons ── */
+.BtnPrimary {
+    background-color: #ff1e38;
+    border: 1px solid #ff1e38;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.BtnPrimary:hover {
+    background-color: #ff3b52;
+    border-color: #ffffff;
+}
+
+.BtnSecondary {
+    background-color: #151b27;
+    border: 1px solid #283348;
+    color: #c9d1d9;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 8px 14px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.BtnSecondary:hover {
+    border-color: #ff1e38;
+    color: #ffffff;
+}
+
+/* ── Revision Suite App Card ── */
+.SuiteCard {
+    background-color: #10141e;
+    border: 1px solid #1e2637;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.SuiteCard:hover {
+    border-color: #ff1e38;
+    background-color: #131926;
+}
+
+.SuiteAppTitle {
+    font-size: 16px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.SuiteAppTag {
+    font-size: 11px;
+    font-weight: 700;
+    color: #00f0ff;
+    letter-spacing: 0.8px;
+}
+
+.SuiteAppDesc {
+    font-size: 12px;
+    color: #8b949e;
+    line-height: 1.5;
+}
+
+.SuiteMetaText {
+    font-size: 11px;
+    color: #ffb703;
+    font-weight: bold;
+}
+
+/* ── Scrollbars ── */
+QScrollBar:vertical {
+    border: none;
+    background: #08090d;
+    width: 8px;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background: #232c3f;
+    min-height: 30px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #ff1e38;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}

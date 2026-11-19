@@ -805,10 +805,9 @@ class RevLauncherWindow(QMainWindow):
         inst_grid.setSpacing(10)
 
         installers = [
-            ("🚀 Rev-Launcher", "Rev-Launcher.zip", "Native PySide6 Build", "http://127.0.0.1:8000/downloads/Rev-Launcher.zip"),
-            ("🌐 Revision-Web", "Revision-Web-Setup.exe", "245 MB EXE Installer", "http://127.0.0.1:8000/downloads/Revision-Web-Setup.exe"),
-            ("⚡ Revision-Ai", "Revision-Ai-v2.2.zip", "AI Automation Suite", "http://127.0.0.1:8000/downloads/Revision-Ai-v2.2.zip"),
-            ("⚓ Zartogrify", "Zartogrify-v2.2.zip", "Discord Coordinator", "http://127.0.0.1:8000/downloads/Zartogrify-v2.2.zip")
+            ("🚀 Rev-Launcher", "Rev-Launcher.zip", "Native .EXE Build & Icon", "http://127.0.0.1:8000/downloads/Rev-Launcher.zip"),
+            ("🌐 Revision-Web", "Revision-Web.zip", "Tactical Browser .EXE & Icon", "http://127.0.0.1:8000/downloads/Revision-Web.zip"),
+            ("⚡ Revision-Ai", "Revision-Ai-v2.2.zip", "AI Controller .EXE & Icon", "http://127.0.0.1:8000/downloads/Revision-Ai-v2.2.zip")
         ]
 
         for i, (name, fname, fsize, durl) in enumerate(installers):
